@@ -8,16 +8,13 @@ interface myLoginState {
   logged: boolean;
 }
 
-export default class Loginpage extends React.Component<
-  myLoginProps,
-  myLoginState
-> {
-  constructor(props: string | number) {
+export default class Loginpage extends React.Component< myLoginProps, myLoginState> {
+  constructor(props: myLoginProps) {
     super(props);
     this.state = {
-      userName: "Taiwo",
-      password: "taiwo1234",
-      logged: false,
+      userName: "",
+      password: "",
+      logged: false
       
     };
   }
@@ -25,7 +22,7 @@ export default class Loginpage extends React.Component<
   updateLogin = (event: any) => {
     event.preventDefault();
 
-    let userNameString: string, passwordString: any;
+    let userNameString: string, passwordString: string;
 
     const userName: HTMLInputElement | any = document.querySelector(
       '[name="user-name"]'
@@ -34,15 +31,19 @@ export default class Loginpage extends React.Component<
       '[name="password"]'
     );
 
-    if (userName === "Taiwo") userNameString = userName.value;
-    else return;
+    if (userName === "Taiwo"){ userNameString = userName.value;
+    } else {
     userNameString = "incorrect";
-
-    if (password === "taiwo1234") passwordString = password.value;
-    else return;
+    console.log(userName);
+  }
+    
+    if (password === "taiwo1234"){ passwordString = password.value;
+    }else {
     passwordString = "invalid";
-
-    this.setState({
+    console.log(password)
+  }
+  
+  this.setState({
       userName: userNameString,
       password: passwordString,
       logged: this.state.logged,
@@ -53,7 +54,7 @@ export default class Loginpage extends React.Component<
       this.setState({
         userName: this.state.userName,
         password: this.state.password,
-        logged: !this.state.logged, // Switch boolean to the opposite (!)
+        logged: !this.state.logged // Switch boolean to the opposite (!)
       });
     };
 
@@ -64,9 +65,9 @@ export default class Loginpage extends React.Component<
                   <label htmlFor="user-name">User Name:</label>
                 <input type="text" name="first-name" defaultValue={this.state.userName} />
                 <label htmlFor="password">Password:</label>
-                <input type="text" name="password" defaultValue={this.state.password} />
-                <input type="submit" value="Signin" />
-               </form>
+                <input type="password" name="password" defaultValue={this.state.password} />
+                <input type="submit"  value="SignIn" />
+                </form>
             <button onClick={this.loggedin}>
               Login
              </button>
@@ -82,7 +83,8 @@ Logout = () => {
               <input type="text" name="user-name" defaultValue={this.state.userName} />
               <label htmlFor="password">Password:</label>
               <input type="text" name="password" defaultValue={this.state.password} />
-              <input type="submit" value="Signout" />
+              <input type="submit"  value="SignOut" />
+                
                </form>
           <button onClick={this.loggedin}>
                    Logout
